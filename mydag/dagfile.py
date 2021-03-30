@@ -4,6 +4,8 @@ from datetime import datetime
 # Comentario
 import mydag.src.functions as src
 
+# Otro comentario
+
 dag = DAG(
     dag_id="test-dag",
     start_date=datetime(2021, 1, 1),
