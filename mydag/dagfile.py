@@ -1,8 +1,8 @@
+import mydag.src.functions as src
+
 from airflow.models import DAG
 from airflow.operators.python_operator import PythonOperator
 from datetime import datetime
-# Comentario
-import mydag.src.functions as src
 
 dag = DAG(
     dag_id="test-dag",
