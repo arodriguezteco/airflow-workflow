@@ -1,12 +1,11 @@
 name: DAGs integration testing
-on:
 
+on:
   pull_request:
     branches:
       - main
     
 jobs:
-
   testing_and_linting:
     name: Run unit testing and linting
     runs-on: ubuntu-latest
@@ -27,13 +26,17 @@ jobs:
         name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install pytest
+          pip install pytest flake8
       -
         name: Unit testing
         run: |
           if [ -d ${{ env.BRANCH }}/tests/ ]; then
             pytest;
           fi
+      -
+        name: Linting
+        run: |
+          flake8 ${{ env.BRANCH }} --count --exit-zero
         
   dag_integration:
     name: Test DAG integration
