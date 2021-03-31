@@ -1,18 +1,13 @@
-# action.yml
-name: 'Airflow DAG Check'
+name: 'DAG integration check'
 description: 'Run some testing on a DAG definition'
 
 inputs:
-  dag_folder:  
+  DAG:  
     description: 'DAG folder name'
     required: true
-
-outputs:
-  time:
-    description: 'The time we greeted you'
 
 runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
-    - ${{ inputs.dag_folder }}
+    - ${{ inputs.DAG }}
