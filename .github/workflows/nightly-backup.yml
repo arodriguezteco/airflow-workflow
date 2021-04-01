@@ -24,7 +24,7 @@ jobs:
         uses: google-github-actions/upload-cloud-storage@main
         with:
           path: ${{ env.FILENAME }}.tar.gz
-          destination: gh-repo-dags-bkp-sf3kl42/${{ env.FILENAME }}.tar.gz
+          destination: gh-repo-dags-bkp-sf3kl42
           credentials: ${{ secrets.GCP_SERVICE_CREDENTIALS }}
       
       # -
