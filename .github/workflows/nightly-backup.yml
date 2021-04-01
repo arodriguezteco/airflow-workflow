@@ -18,10 +18,7 @@ jobs:
       -
         name: Create tarball from main branch
         run:
-          git archive \
-            --format=tar.gz \
-            --output=${{ env.FILENAME }}.tar.gz \
-            main
+          git archive --format=tar.gz --output=${{ env.FILENAME }}.tar.gz main
       -
         name: Upload to GCS bucket 
         uses: google-github-actions/upload-cloud-storage@main
