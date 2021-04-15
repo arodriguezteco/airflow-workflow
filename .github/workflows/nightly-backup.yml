@@ -1,38 +1,38 @@
-name: Nightly backup build
-on:
-  workflow_dispatch:
-  schedule:
-    - cron: '0 3 * * *'
+# name: Nightly backup build
+# on:
+#   workflow_dispatch:
+#   schedule:
+#     - cron: '0 3 * * *'
     
-jobs:
-  backup:
-    name: Create nightly backup
-    runs-on: ubuntu-latest
-    steps:
-      -
-        name: Checkout
-        uses: actions/checkout@v2
-      - 
-        name: Add dynamic variables to gh environment
-        run: echo "FILENAME="$(date +'%Y%m%d') >> $GITHUB_ENV
-      -
-        name: Create tarball from main branch
-        run:
-          git archive --format=tar.gz --output=${{ env.FILENAME }}.tar.gz main
-      -
-        name: Upload to GCS bucket 
-        uses: google-github-actions/upload-cloud-storage@main
-        with:
-          path: ${{ env.FILENAME }}.tar.gz
-          destination: gh-repo-dags-bkp-sf3kl42
-          credentials: ${{ secrets.GCP_SERVICE_CREDENTIALS }}
+# jobs:
+#   backup:
+#     name: Create nightly backup
+#     runs-on: ubuntu-latest
+#     steps:
+#       -
+#         name: Checkout
+#         uses: actions/checkout@v2
+#       - 
+#         name: Add dynamic variables to gh environment
+#         run: echo "FILENAME="$(date +'%Y%m%d') >> $GITHUB_ENV
+#       -
+#         name: Create tarball from main branch
+#         run:
+#           git archive --format=tar.gz --output=${{ env.FILENAME }}.tar.gz main
+#       -
+#         name: Upload to GCS bucket 
+#         uses: google-github-actions/upload-cloud-storage@main
+#         with:
+#           path: ${{ env.FILENAME }}.tar.gz
+#           destination: gh-repo-dags-bkp-sf3kl42
+#           credentials: ${{ secrets.GCP_SERVICE_CREDENTIALS }}
       
-      # -
-      #   name: Upload artifact
-      #   uses: actions/upload-artifact@v2
-      #   with:
-      #     name: ${{ env.FILENAME }}
-      #     path: |
-      #       *
-      #       !.git
-      #     retention-days: 3
+#       # -
+#       #   name: Upload artifact
+#       #   uses: actions/upload-artifact@v2
+#       #   with:
+#       #     name: ${{ env.FILENAME }}
+#       #     path: |
+#       #       *
+#       #       !.git
+#       #     retention-days: 3
